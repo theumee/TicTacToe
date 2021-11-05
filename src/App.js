@@ -1,25 +1,80 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 
-function App() {
+const App = () => {
+  
+  const [playerTurn,setPlayerTurn]  = useState("X");
+  const [placeholder,setPlaceholder] = useState(["","","","","","","","",""]);
+  const [winner,setWinner] = useState(false);
+  const [gameStatus,setGameStatus] = useState("ㅤ");
+
+
+  const winCombo = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+  ]
+  const squareClicked = (index) => {
+    if(placeholder[index] === "" && winner === false){
+      placeholder[index] = playerTurn;
+      setPlaceholder(placeholder);                                                                           
+      setPlayerTurn(playerTurn === "X" ? "O" : "X");
+      
+      for(let i in winCombo){
+        let winRow = winCombo[i];
+        let p1 = placeholder[winRow[0]];
+        let p2 = placeholder[winRow[1]];
+        let p3 = placeholder[winRow[2]];
+        console.log(p1,p2,p3);
+        if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
+          setWinner(true);
+          console.log(p1,p2,p3);
+          setGameStatus(`${playerTurn} WON`);
+        }else if ( winner !== true && !placeholder.includes("") ){
+          setGameStatus("It's a tie!");
+          break;
+        }
+
+      }
+        
+    }
+  }
+
+  const handleReset = () => {
+    
+      setPlayerTurn("X");
+      setWinner(false);
+      setPlaceholder(["","","","","","","","","",]);
+      setGameStatus("ㅤ");
+    
+  }
+ 
+  
+
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1 className="game--title">Tic Tac Toe</h1>
+      <h2 className="game--status">{gameStatus}</h2>
+      <div className="game--container">
+        {placeholder.map((square, index) => {
+          return (<div onClick={() => squareClicked(index)} className="cell" >{square}</div>)
+        })}
+      </div>
+      <h3 className="game--status">Player {playerTurn}'s Turn</h3>
+      <button onClick={() => handleReset()} type="reset" className="game--restart">Reset</button>
+
     </div>
-  );
+
+
+   );
 }
 
 export default App;
