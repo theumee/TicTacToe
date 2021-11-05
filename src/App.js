@@ -10,6 +10,12 @@ const App = () => {
 
 
 
+  const handleTie = () => {
+    if ( winner === false && !placeholder.includes("")){
+      setGameStatus("It's a tie!");
+    }
+  }
+  
   const squareClicked = (index) => {
     const winCombo = [
       [0,1,2],
@@ -30,21 +36,16 @@ const App = () => {
         let p1 = placeholder[winRow[0]];
         let p2 = placeholder[winRow[1]];
         let p3 = placeholder[winRow[2]];
-
-        console.log(p1,p2,p3);
         
         if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
           setWinner(true);
           setGameStatus(`${playerTurn} WON`);
-        }else if ( winner === false && !placeholder.includes("") && winRow === [2,4,6]){
-          setGameStatus("It's a tie!");
-          break;
         }
 
       }
         
     }
-    console.log("------");
+    handleTie();
   }
 
   const handleReset = () => {
