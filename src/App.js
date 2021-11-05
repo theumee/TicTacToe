@@ -30,10 +30,10 @@ const App = () => {
         let p1 = placeholder[winRow[0]];
         let p2 = placeholder[winRow[1]];
         let p3 = placeholder[winRow[2]];
-        console.log(p1,p2,p3);
+
         if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
           setWinner(true);
-          console.log(p1,p2,p3);
+
           setGameStatus(`${playerTurn} WON`);
         }else if ( winner !== true && !placeholder.includes("") ){
           setGameStatus("It's a tie!");
