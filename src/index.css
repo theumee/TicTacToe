@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,600&family=Open+Sans:ital@1&display=swap');
+
 *{
   margin: 0;
   box-sizing: border-box;
 }
 body {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   background-color: #0e0e0e;
 }
@@ -27,7 +29,7 @@ body {
 }
 
 .cell {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'JetBrains Mono', monospace;
   width: 100px;
   height: 100px;
   box-shadow: 2px 2px 2px 2px #ffc97e;
