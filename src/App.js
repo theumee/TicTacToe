@@ -9,36 +9,34 @@ const App = () => {
   const [gameStatus,setGameStatus] = useState("ㅤ");
 
 
-  const winCombo = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6],
-  ]
+
   const squareClicked = (index) => {
+    const winCombo = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6],
+    ]
     if(placeholder[index] === "" && winner === false){
       placeholder[index] = playerTurn;
       setPlaceholder(placeholder);                                                                           
       setPlayerTurn(playerTurn === "X" ? "O" : "X");
       
-      for(let i in winCombo){
-        let winRow = winCombo[i];
+      for(let winRow of winCombo){
         let p1 = placeholder[winRow[0]];
         let p2 = placeholder[winRow[1]];
         let p3 = placeholder[winRow[2]];
 
-        if(p1&&p1 === p2 && p1 === p3){
-
+        console.log(p1,p2,p3);
+        
+        if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
           setWinner(true);
           setGameStatus(`${playerTurn} WON`);
-        // if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
-        //   setWinner(true);
-        //   setGameStatus(`${playerTurn} WON`);
-        }else if ( winner !== true && !placeholder.includes("") ){
+        }else if ( winner === false && !placeholder.includes("") && winRow === [2,4,6]){
           setGameStatus("It's a tie!");
           break;
         }
@@ -46,6 +44,7 @@ const App = () => {
       }
         
     }
+    console.log("------");
   }
 
   const handleReset = () => {
@@ -73,7 +72,6 @@ const App = () => {
       </div>
       <h3 className="game--status">Player {playerTurn}'s Turn</h3>
       <button onClick={() => handleReset()} type="reset" className="game--restart">Reset</button>
-
     </div>
 
 
