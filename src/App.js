@@ -10,11 +10,7 @@ const App = () => {
 
 
 
-  const handleTie = () => {
-    if ( winner === false && !placeholder.includes("")){
-      setGameStatus("It's a tie!");
-    }
-  }
+
   
   const squareClicked = (index) => {
     const winCombo = [
@@ -40,12 +36,16 @@ const App = () => {
         if(p1 !== "" &&  p1 === p2 && p2 === p3 ){
           setWinner(true);
           setGameStatus(`${playerTurn} WON`);
+          return;
         }
 
       }
-        
+      
     }
-    handleTie();
+    if (!placeholder.includes("")){
+      setGameStatus("It's a tie!");
+    }
+    
   }
 
   const handleReset = () => {
